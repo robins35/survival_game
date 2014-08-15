@@ -1,5 +1,9 @@
-(function($) {
+(function($, AssetManager) {
 $(document).ready(function() {
-	console.log("YO");
+	function doneLoading() {
+		console.log("FINISHED LOADING ASSETS!")
+	}
+
+	AssetManager.loadAssets(doneLoading)
 })
-})(jQuery)
+})(jQuery, AssetManager)
