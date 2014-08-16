@@ -1,4 +1,4 @@
-(function($, AssetManager) {
+(function($, AssetManager, Map) {
 $(document).ready(function() {
 	function doneLoadingAssets() {
 		console.log("FINISHED LOADING ASSETS!")
