@@ -1,9 +1,14 @@
 (function($, AssetManager) {
 $(document).ready(function() {
-	function doneLoading() {
+	function doneLoadingAssets() {
 		console.log("FINISHED LOADING ASSETS!")
 	}
 
-	AssetManager.loadAssets(doneLoading)
+	function doneLoadingMap() {
+		console.log("FINISHED LOADING THE MAP!")
+	}
+
+	AssetManager.loadAssets(doneLoadingAssets)
+	Map.loadMap(doneLoadingMap)
 })
-})(jQuery, AssetManager)
+})(jQuery, AssetManager, Map)

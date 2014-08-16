@@ -55,6 +55,7 @@ var AssetManager = (function() {
 	return {
 		loadAssets : loadAssets,
 		getImage : getImage,
-		getAudio : getAudio
+		getAudio : getAudio,
+		imgs : imgs
 	}
 })()
