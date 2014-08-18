@@ -15,13 +15,14 @@ var SpriteList = function() {
 
 var sprites = new SpriteList();
 var activeSprites = new SpriteList();
+var environmentSprites =  new SpriteList();
 
 var Game = (function() {
     var keysDown = {};
 
     addEventListener("keydown", function(e) {
         keysDown[e.keyCode] = true;
-        console.log(e.keyCode);
+        //console.log(e.keyCode);
     });
 
     addEventListener("keyup", function(e) {
@@ -51,7 +52,7 @@ var Game = (function() {
             this.player = (function() {
                 var obj = {};
 
-                BaseVisual.call(obj, true, {x: 0, y: 0}, 32, 32);
+                BaseVisual.call(obj, true, {x: 300, y: 200}, 32, 32);
 
                 var img = AssetManager.getImage('player');
                 obj.speed = (1.0 / Game.FPS) * 200;
@@ -94,10 +95,25 @@ var Game = (function() {
             this.collisionResolution(collisionData);
         },
         collisionDetection : function() {
-            
+            var spr;
+            var collisions = [];
+            for (prop in environmentSprites.list) {
+                spr = environmentSprites.list[prop];
+
+                if ((this.player.pos.x < (spr.pos.x + spr.width)) &&
+                    ((this.player.pos.x + this.player.width) > spr.pos.x) &&
+                    (this.player.pos.y < (this.player.pos.y + this.player.height)) &&
+                    ((this.player.pos.y + this.player.height) > spr.pos.y))
+                {
+                    collisions.push({r1 : this.player, r2 : spr}) 
+                }
+            }
+            return collisions;
         },
         collisionResolution : function(collisionData) {
-            
+            collisionData.forEach(function(elm, ind, arr) {
+                console.log("COLLISION BETWEEN " + elm.r1 + " AND " + elm.r2);
+            });
         },
         drawMap : function() {
             var startX = this.view.pos.x - (this.view.pos.x % this.Map.tileSize);
@@ -136,6 +152,7 @@ var BaseVisual = function(activeFlag, pos, width, height) {
 
 var viewBorderDetector = function(pos, width, height) {
     BaseVisual.call(this, true, pos, width, height);
+    environmentSprites.push(this);
 
     this.color = 'rgba(0, 0, 128, .3)';
     this.draw = function() {
