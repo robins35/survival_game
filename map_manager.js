@@ -4,14 +4,7 @@ var init = function(assetImgs) {
 		0 : this.imgs.grass,
 		1 : this.imgs.dirt,
 		2 : this.imgs.water
-	};
-	this.tileSize = this.imgMapping[0].width;
-}
-
-var getImageAt = function(pos) {
-	//	console.log("ERROR: YOU REQUESTED AN IMAGE OUTSIDE THE MAP!");
-	//	return false;
-	return this.imgMapping[map[Math.floor(pos.y / this.tileSize)][Math.floor(pos.x / this.tileSize)]];
+	}
 }
 
 var map = [
@@ -40,7 +33,7 @@ var map = [
 
 module.exports = {
 	imgs : {},
+	imgMapping : {},
 	init : init,
-	getImageAt : getImageAt,
-	tileSize : undefined
+	map : map
 };
