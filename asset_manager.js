@@ -5,6 +5,8 @@ var imgPaths = [
     "images/grass.png",
     "images/dirt.gif",
     "images/water.gif",
+    "images/mushroom.gif",
+    "images/tree.png",
     "images/player.png"
 ];
 
